@@ -32,7 +32,10 @@ public class KafkaConsumerConfig {
 
         // Set autoCommit to false
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
-//        props.put(ConsumerConfig.GROUP_ID_CONFIG, "your_consumer_group");
+
+        //Set offset.retention.minutes=1 at broker,So that it will delete offset details at broker after 1 min.
+        // So if consumer connect after one min,it will start getting only data.
+
         return props;
     }
 
