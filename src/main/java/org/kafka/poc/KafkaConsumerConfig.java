@@ -33,8 +33,9 @@ public class KafkaConsumerConfig {
         // Set autoCommit to false
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 
-        //Set offset.retention.minutes=1 at broker,So that it will delete offset details at broker after 1 min.
-        // So if consumer connect after one min,it will start getting only data.
+        // Set offset.retention.minutes=1 at broker,So that it will delete offset
+        // details at broker after 1 min.
+        // So if consumer connect after one min,it will start getting only latest data.
 
         return props;
     }
@@ -46,8 +47,7 @@ public class KafkaConsumerConfig {
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
